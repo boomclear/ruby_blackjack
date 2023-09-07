@@ -1,0 +1,5 @@
+require './lib/card'
+require './lib/computer'
+require './lib/deck'
+require './lib/game'
+require './lib/player'
