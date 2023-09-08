@@ -1,10 +1,24 @@
 class Player
-  attr_reader :name, :hand_value, :hand_cards
+  attr_reader :hand_value, :hand_cards
 
-  def initialize(name)
+  def initialize
     @hand_value = 0
     @hand_cards = []
-    @name = name
+    @stay = false
+    @bust = false
+  end
+
+  def blackjack?
+    get_hand_value
+    @hand_cards.length == 2 && @hand_value == 21
+  end
+
+  def bust?
+    @bust
+  end
+
+  def bust
+    @bust = true
   end
 
   def recieve_card(card)
@@ -31,13 +45,18 @@ class Player
   end
 
   def check_for_low_aces
-    return unless @hand_value > 21
+    if @hand_value > 21
 
-    ace = @hand_cards.find do |card|
-      card.name == 'Ace' && card.value != 1
+      ace = @hand_cards.find do |card|
+        card.name == 'Ace' && card.value != 1
+      end
+      return unless ace
+
+      ace.value = 1
+      get_hand_value
+      true
+    else
+      false
     end
-    return unless ace
-
-    ace.value = 1
   end
 end

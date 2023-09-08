@@ -20,7 +20,7 @@ RSpec.describe 'Deck Class' do
 
       expect(deck.deck_of_cards.length).to eq(0)
       deck.create_deck
-      expect(deck.deck_of_cards.length).to eq(52)
+      expect(deck.deck_of_cards.length).to eq(312)
     end
     it 'can shuffle deck' do
       deck = Deck.new
@@ -34,9 +34,9 @@ RSpec.describe 'Deck Class' do
       deck.create_deck
       deck.shuffle_deck
       card = deck.deck_of_cards.last
-      expect(deck.deck_of_cards.length).to eq(52)
+      expect(deck.deck_of_cards.length).to eq(312)
       expect(deck.draw).to eq(card)
-      expect(deck.deck_of_cards.length).to eq(51)
+      expect(deck.deck_of_cards.length).to eq(311)
     end
   end
 end

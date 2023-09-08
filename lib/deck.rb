@@ -23,11 +23,14 @@ class Deck
       Two
     ]
     values = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
-    suits.each do |suit|
-      value_index = 0
-      names.each do |name|
-        @deck_of_cards.push(Card.new(name, suit, values[value_index]))
-        value_index += 1
+
+    6.times do
+      suits.each do |suit|
+        value_index = 0
+        names.each do |name|
+          @deck_of_cards.push(Card.new(name, suit, values[value_index]))
+          value_index += 1
+        end
       end
     end
     @deck_of_cards
