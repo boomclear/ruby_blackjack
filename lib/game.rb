@@ -10,6 +10,7 @@ class Game
     @player_bust = false
     @deck.create_deck
     @deck.shuffle_deck
+    @main_menu = true
   end
 
   def main_menu
@@ -30,12 +31,12 @@ class Game
   end
 
   def game_start
-    start
-    blackjack_check
-    player_turn
-    player_loss if @player_bust
-    dealer_turn
-    game_results
+    @main_menu = false
+    start unless @main_menu
+    blackjack_check unless @main_menu
+    player_turn unless @main_menu
+    dealer_turn unless @main_menu
+    game_results unless @main_menu
   end
 
   def game_results
@@ -52,11 +53,13 @@ class Game
 
   def player_blackjack
     puts 'Blackjack! You win!'
+    @main_menu = true
     main_menu
   end
 
   def player_win
     puts 'You win!'
+    @main_menu = true
     main_menu
   end
 
@@ -64,6 +67,7 @@ class Game
     puts 'Dealer hand:'
     @dealer.show_hand
     puts 'Blackjack! You lose!'
+    @main_menu = true
     main_menu
   end
 
@@ -73,11 +77,13 @@ class Game
       puts @player.hand_value
     end
     puts 'You lose!'
+    @main_menu = true
     main_menu
   end
 
   def game_tie
     puts 'Tie!'
+    @main_menu = true
     main_menu
   end
 
@@ -116,6 +122,7 @@ class Game
         end
       elsif @player.hand_value > 21 && !@player.check_for_low_aces
         @player_bust = true
+        player_loss
       end
     end
   end
