@@ -30,7 +30,8 @@ class Game
     end
   end
 
-  def game_start
+  def game_start 
+    # the unless conditions are confirming that we aren't looping into another game while we select a new game through main_menu
     @main_menu = false
     start unless @main_menu
     blackjack_check unless @main_menu
