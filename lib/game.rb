@@ -87,11 +87,15 @@ class Game
     main_menu
   end
 
-  def start
+  def game_reset
     @player_bust = false
     @player_stay = false
     @dealer_stay = false
     @dealer_bust = false
+  end
+
+  def start
+    game_reset
     @player.recieve_card(@deck.draw)
     @dealer.recieve_card(@deck.draw)
     puts 'Dealer Has:'

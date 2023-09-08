@@ -46,7 +46,6 @@ class Player
 
   def check_for_low_aces
     if @hand_value > 21
-
       ace = @hand_cards.find do |card|
         card.name == 'Ace' && card.value != 1
       end
