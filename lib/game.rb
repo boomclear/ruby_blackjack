@@ -100,6 +100,9 @@ class Game
     @dealer.recieve_card(@deck.draw)
     puts 'You have:'
     @player.show_hand
+    @player.get_hand_value
+    puts 'Hand value:'
+    puts @player.hand_value
   end
 
   def player_turn
@@ -107,18 +110,21 @@ class Game
 
       @player.get_hand_value
       if @player.hand_value <= 21
-        puts 'Hit or Stay?'
+        puts 'Hit (H) or Stay (S)?'
         player_choice = gets.chomp.upcase
-        if player_choice == 'HIT'
+        if player_choice == 'H'
           @player.recieve_card(@deck.draw)
           puts 'Your new hand is:'
           @player.show_hand
-        elsif player_choice == 'STAY'
+          @player.get_hand_value
+          puts 'Hand value:'
+          puts @player.hand_value
+        elsif player_choice == 'S'
           @player_stay = true
           puts 'Your hand value:'
           puts @player.hand_value
         else
-          puts 'Please either input hit or stay'
+          puts 'Please either input H for hit or S for stay'
         end
       elsif @player.hand_value > 21 && !@player.check_for_low_aces
         @player_bust = true
