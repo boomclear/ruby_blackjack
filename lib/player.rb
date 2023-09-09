@@ -13,20 +13,8 @@ class Player
     @hand_cards.length == 2 && @hand_value == 21
   end
 
-  def bust?
-    @bust
-  end
-
-  def bust
-    @bust = true
-  end
-
   def recieve_card(card)
     @hand_cards.push(card)
-  end
-
-  def new_game
-    @hand_cards = []
   end
 
   def show_hand

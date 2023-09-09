@@ -2,6 +2,7 @@ require_relative 'player'
 require_relative 'dealer'
 
 class Game
+
   def initialize(deck)
     @deck = deck
     @player_bust = false
@@ -30,7 +31,7 @@ class Game
     end
   end
 
-  def game_start 
+  def game_start
     # the unless conditions are confirming that we aren't looping into another game while we select a new game through main_menu
     @main_menu = false
     start unless @main_menu
@@ -115,6 +116,7 @@ class Game
     puts 'Your new hand is:'
     @player.show_hand
     @player.get_hand_value
+    @player.check_for_low_aces
     puts 'Hand value:'
     puts @player.hand_value
   end
@@ -167,7 +169,7 @@ class Game
     puts 'Dealer hand value:'
     puts @dealer.hand_value
   end
-  
+
   def dealer_stay
     @dealer_stay = true
     puts 'Dealer has:'
