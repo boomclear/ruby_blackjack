@@ -110,6 +110,21 @@ class Game
     puts @player.hand_value
   end
 
+  def player_hit
+    @player.recieve_card(@deck.draw)
+    puts 'Your new hand is:'
+    @player.show_hand
+    @player.get_hand_value
+    puts 'Hand value:'
+    puts @player.hand_value
+  end
+
+  def player_stay
+    @player_stay = true
+    puts 'Your hand value:'
+    puts @player.hand_value
+  end
+
   def player_turn
     while !@player_bust && !@player_stay
 
@@ -118,16 +133,9 @@ class Game
         puts 'Hit (H) or Stay (S)?'
         player_choice = gets.chomp.upcase
         if player_choice == 'H'
-          @player.recieve_card(@deck.draw)
-          puts 'Your new hand is:'
-          @player.show_hand
-          @player.get_hand_value
-          puts 'Hand value:'
-          puts @player.hand_value
+          player_hit
         elsif player_choice == 'S'
-          @player_stay = true
-          puts 'Your hand value:'
-          puts @player.hand_value
+          player_stay
         else
           puts 'Please either input H for hit or S for stay'
         end
@@ -145,19 +153,27 @@ class Game
       if @dealer.hand_value < 17
         @dealer.recieve_card(@deck.draw)
       elsif @dealer.hand_value > 21 && !@dealer.check_for_low_aces
-        @dealer_bust = true
-        puts 'Dealer has:'
-        @dealer.show_hand
-        puts 'Dealer hand value:'
-        puts @dealer.hand_value
+        dealer_bust
       else
-        @dealer_stay = true
-        puts 'Dealer has:'
-        @dealer.show_hand
-        puts 'Dealer hand value:'
-        puts @dealer.hand_value
+        dealer_stay
       end
     end
+  end
+
+  def dealer_bust
+    @dealer_bust = true
+    puts 'Dealer has:'
+    @dealer.show_hand
+    puts 'Dealer hand value:'
+    puts @dealer.hand_value
+  end
+  
+  def dealer_stay
+    @dealer_stay = true
+    puts 'Dealer has:'
+    @dealer.show_hand
+    puts 'Dealer hand value:'
+    puts @dealer.hand_value
   end
 
   def blackjack_check

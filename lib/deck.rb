@@ -37,15 +37,15 @@ class Deck
   end
 
   def shuffle_deck
-    current_index = @deck_of_cards.length
-    while current_index != 0
-      random_index = rand(current_index)
-      current_index -= 1
-      temporary_value = @deck_of_cards[current_index]
-      @deck_of_cards[current_index] = @deck_of_cards[random_index]
-      @deck_of_cards[random_index] = temporary_value
-    end
-    @deck_of_cards
+    @deck_of_cards.shuffle!
+    # current_index = @deck_of_cards.length
+    # while current_index != 0
+    #   random_index = rand(current_index)
+    #   current_index -= 1
+    #   temporary_value = @deck_of_cards[current_index]
+    #   @deck_of_cards[current_index] = @deck_of_cards[random_index]
+    #   @deck_of_cards[random_index] = temporary_value
+    # end
   end
 
   def draw
