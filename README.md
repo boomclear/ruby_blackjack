@@ -4,7 +4,6 @@ This project uses Ruby 3.2.2 and the following gems:
 
 Gems:
 gem "rspec"
-gem 'pry'
 
 Setup: 
 
@@ -24,4 +23,4 @@ Dealer will always stay at 17 or over
 
 How to run tests:
 
-after running setup, type 'bundle exec rspec' to run all tests
+after running setup, run 'bundle exec rspec' to run all tests
