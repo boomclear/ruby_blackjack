@@ -1,5 +1,7 @@
 class Player
-  attr_reader :hand_value, :hand_cards
+  attr_reader :hand_cards
+
+  attr_accessor :hand_value
 
   def initialize
     @hand_value = 0

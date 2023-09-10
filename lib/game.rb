@@ -1,10 +1,21 @@
 require_relative 'player'
 require_relative 'dealer'
+class Ui
+  def print(string)
+    puts string
+  end
+
+  def get_input
+    gets.chomp.upcase
+  end
+end
 
 class Game
+  attr_accessor :dealer, :player, :player_bust
 
-  def initialize(deck)
+  def initialize(deck, ui = Ui.new)
     @deck = deck
+    @ui = ui
     @player_bust = false
     @player_stay = false
     @dealer_stay = false
@@ -12,21 +23,23 @@ class Game
     @deck.create_deck
     @deck.shuffle_deck
     @main_menu = true
+    @player = Player.new
+    @dealer = Dealer.new
   end
 
   def main_menu
     @main_menu = true
-    puts 'Welcome to BlackJack'
-    puts 'Enter P to Play or Enter Q to Quit'
-    player_choice = gets.chomp.upcase
+    @ui.print 'Welcome to BlackJack'
+    @ui.print 'Enter P to Play or Enter Q to Quit'
+    player_choice = @ui.get_input
     if player_choice == 'P'
       @player = Player.new
       @dealer = Dealer.new
       game_start
     elsif player_choice == 'Q'
-      puts 'Goodbye!'
+      @ui.print 'Goodbye!'
     else
-      puts 'Please enter either P or Q'
+      @ui.print 'Please enter either P or Q'
       main_menu
     end
   end
@@ -54,37 +67,37 @@ class Game
   end
 
   def player_blackjack
-    puts 'Blackjack! You win!'
+    @ui.print 'Blackjack! You win!'
     @main_menu = true
     main_menu
   end
 
   def player_win
-    puts 'You win!'
+    @ui.print 'You win!'
     @main_menu = true
     main_menu
   end
 
   def dealer_blackjack
-    puts 'Dealer hand:'
+    @ui.print 'Dealer hand:'
     @dealer.show_hand
-    puts 'Blackjack! You lose!'
+    @ui.print 'Blackjack! You lose!'
     @main_menu = true
     main_menu
   end
 
   def player_loss
     if @player_bust
-      puts 'Your hand value:'
-      puts @player.hand_value
+      @ui.print 'Your hand value:'
+      @ui.print @player.hand_value
     end
-    puts 'You lose!'
+    @ui.print 'You lose!'
     @main_menu = true
     main_menu
   end
 
   def game_tie
-    puts 'Tie!'
+    @ui.print 'Tie!'
     @main_menu = true
     main_menu
   end
@@ -100,30 +113,30 @@ class Game
     game_reset
     @player.recieve_card(@deck.draw)
     @dealer.recieve_card(@deck.draw)
-    puts 'Dealer Has:'
+    @ui.print 'Dealer Has:'
     @dealer.show_hand
     @player.recieve_card(@deck.draw)
     @dealer.recieve_card(@deck.draw)
-    puts 'You have:'
+    @ui.print 'You have:'
     @player.show_hand
     @player.get_hand_value
-    puts 'Hand value:'
+    @ui.print 'Hand value:'
     puts @player.hand_value
   end
 
   def player_hit
     @player.recieve_card(@deck.draw)
-    puts 'Your new hand is:'
+    @ui.print 'Your new hand is:'
     @player.show_hand
     @player.get_hand_value
     @player.check_for_low_aces
-    puts 'Hand value:'
+    @ui.print 'Hand value:'
     puts @player.hand_value
   end
 
   def player_stay
     @player_stay = true
-    puts 'Your hand value:'
+    @ui.print 'Your hand value:'
     puts @player.hand_value
   end
 
@@ -132,14 +145,14 @@ class Game
 
       @player.get_hand_value
       if @player.hand_value <= 21
-        puts 'Hit (H) or Stay (S)?'
-        player_choice = gets.chomp.upcase
+        @ui.print 'Hit (H) or Stay (S)?'
+        player_choice = @ui.get_input
         if player_choice == 'H'
           player_hit
         elsif player_choice == 'S'
           player_stay
         else
-          puts 'Please either input H for hit or S for stay'
+          @ui.print 'Please either input H for hit or S for stay'
         end
       elsif @player.hand_value > 21 && !@player.check_for_low_aces
         @player_bust = true

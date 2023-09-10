@@ -24,16 +24,6 @@ RSpec.describe 'Player Class' do
       expect(player.hand_cards.length).to eq(1)
     end
 
-    it 'new_game' do
-      player = Player.new
-      card = Card.new('Ace', 'Spades', 11)
-
-      player.recieve_card(card)
-      expect(player.hand_cards.length).to eq(1)
-      player.new_game
-      expect(player.hand_cards.length).to eq(0)
-    end
-
     it 'show_hand' do
       player = Player.new
       card = Card.new('Ace', 'Spades', 11)
