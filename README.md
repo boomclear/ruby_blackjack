@@ -21,3 +21,7 @@ run 'ruby runner.rb' while in the root directory in your terminal this will star
 Notes:
 
 Dealer will always stay at 17 or over
+
+How to run tests:
+
+after running setup, type 'bundle exec rspec' to run all tests
