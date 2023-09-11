@@ -165,6 +165,7 @@ class Game
     while !@dealer_bust && !@dealer_stay
 
       @dealer.get_hand_value
+      @dealer.check_for_low_aces
       if @dealer.hand_value < 17
         @dealer.recieve_card(@deck.draw)
       elsif @dealer.hand_value > 21 && !@dealer.check_for_low_aces
